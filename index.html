@@ -64,26 +64,238 @@
       <div class="hero__visual">
         <div class="hero__phone">
           <div class="phone-frame">
-            <div class="phone-screen">
-              <div class="phone-header">
-                <div class="phone-search">Search deals near you...</div>
+            <!-- Status bar -->
+            <div class="phone-statusbar">
+              <span class="phone-statusbar__time">9:41</span>
+              <span class="phone-statusbar__icons">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="17" y="4" width="4" height="16" rx="1"/><rect x="11" y="8" width="4" height="12" rx="1"/><rect x="5" y="12" width="4" height="8" rx="1"/></svg>
+                <span class="phone-statusbar__battery">87%</span>
+              </span>
+            </div>
+
+            <div class="phone-screen" id="phoneScreen">
+
+              <!-- Screen: Home / Deals -->
+              <div class="phone-page phone-page--active" id="pageHome">
+                <div class="phone-screen__header">
+                  <img src="voliya-logo.png" alt="Voliya" height="20" />
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <div class="phone-tabs">
+                  <span class="phone-tab phone-tab--active" data-tab="explore">Explore</span>
+                  <span class="phone-tab" data-tab="latest">Latest</span>
+                  <span class="phone-tab" data-tab="categories">Categories</span>
+                </div>
+                <div class="phone-scroll">
+                  <div class="phone-banner">
+                    <div class="phone-banner__text">
+                      <span class="phone-banner__tag">This Week</span>
+                      <strong>Weekly Specials</strong>
+                      <span>12 new deals near you</span>
+                    </div>
+                    <span class="phone-banner__emoji">🔥</span>
+                  </div>
+                  <div class="phone-card phone-card--featured" data-deal="deal1">
+                    <div class="phone-card__badge">Featured</div>
+                    <div class="phone-card__title">20% Off Fresh Produce</div>
+                    <div class="phone-card__business">MH Supermarket — Suva</div>
+                    <div class="phone-card__footer">
+                      <span class="phone-card__timer">⏱ 2d 14h left</span>
+                      <span class="phone-card__heart" data-liked="false">♡</span>
+                    </div>
+                  </div>
+                  <div class="phone-card" data-deal="deal2">
+                    <div class="phone-card__title">Buy 1 Get 1 Free</div>
+                    <div class="phone-card__business">Island Wear — Nadi</div>
+                    <div class="phone-card__footer">
+                      <span class="phone-card__timer">⏱ 5d left</span>
+                      <span class="phone-card__heart" data-liked="false">♡</span>
+                    </div>
+                  </div>
+                  <div class="phone-card" data-deal="deal3">
+                    <div class="phone-card__title">Free Shipping Weekend</div>
+                    <div class="phone-card__business">Fiji Electronics — Lautoka</div>
+                    <div class="phone-card__footer">
+                      <span class="phone-card__timer">⏱ 1d 6h left</span>
+                      <span class="phone-card__heart" data-liked="false">♡</span>
+                    </div>
+                  </div>
+                  <div class="phone-card" data-deal="deal4">
+                    <div class="phone-card__title">30% Off All Clothing</div>
+                    <div class="phone-card__business">Courts — Suva</div>
+                    <div class="phone-card__footer">
+                      <span class="phone-card__timer">⏱ 3d left</span>
+                      <span class="phone-card__heart" data-liked="false">♡</span>
+                    </div>
+                  </div>
+                  <div class="phone-card" data-deal="deal5">
+                    <div class="phone-card__title">$5 Off Orders Over $50</div>
+                    <div class="phone-card__business">New World — Nausori</div>
+                    <div class="phone-card__footer">
+                      <span class="phone-card__timer">⏱ 6d left</span>
+                      <span class="phone-card__heart" data-liked="false">♡</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="phone-card phone-card--featured">
-                <div class="phone-card__badge">Featured</div>
-                <div class="phone-card__title">20% Off Fresh Produce</div>
-                <div class="phone-card__business">MH Supermarket — Suva</div>
-                <div class="phone-card__timer">Ends in 2d 14h</div>
+
+              <!-- Screen: Deal Detail -->
+              <div class="phone-page" id="pageDeal">
+                <div class="phone-detail__header">
+                  <button class="phone-back" id="dealBack">← Back</button>
+                </div>
+                <div class="phone-scroll">
+                  <div class="phone-detail__hero">
+                    <span class="phone-detail__discount" id="dealDiscount">20% OFF</span>
+                  </div>
+                  <div class="phone-detail__body">
+                    <h4 id="dealTitle">20% Off Fresh Produce</h4>
+                    <p class="phone-detail__biz" id="dealBusiness">MH Supermarket — Suva</p>
+                    <div class="phone-detail__meta">
+                      <span>📍 0.8 km away</span>
+                      <span>⏱ Ends in 2d 14h</span>
+                    </div>
+                    <p class="phone-detail__desc">Get 20% off all fresh fruits and vegetables this week. Valid in-store only. Limited to one redemption per customer.</p>
+                    <button class="phone-detail__btn">Redeem This Deal</button>
+                    <div class="phone-detail__info">
+                      <div class="phone-detail__row"><strong>Type</strong><span>Percentage Off</span></div>
+                      <div class="phone-detail__row"><strong>Location</strong><span>All branches</span></div>
+                      <div class="phone-detail__row"><strong>Limit</strong><span>1 per customer</span></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="phone-card">
-                <div class="phone-card__title">Buy 1 Get 1 Free</div>
-                <div class="phone-card__business">Island Wear — Nadi</div>
-                <div class="phone-card__timer">Ends in 5d</div>
+
+              <!-- Screen: Flyers -->
+              <div class="phone-page" id="pageFlyers">
+                <div class="phone-screen__header">
+                  <strong>Flyers</strong>
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </div>
+                <div class="phone-scroll">
+                  <div class="phone-flyer">
+                    <div class="phone-flyer__img">📰</div>
+                    <div class="phone-flyer__info">
+                      <strong>MH Weekly Specials</strong>
+                      <span>Mar 24 – Mar 30</span>
+                      <span class="phone-flyer__views">👁 1.2k views</span>
+                    </div>
+                  </div>
+                  <div class="phone-flyer">
+                    <div class="phone-flyer__img">📰</div>
+                    <div class="phone-flyer__info">
+                      <strong>Courts March Madness</strong>
+                      <span>Mar 20 – Apr 5</span>
+                      <span class="phone-flyer__views">👁 856 views</span>
+                    </div>
+                  </div>
+                  <div class="phone-flyer">
+                    <div class="phone-flyer__img">📰</div>
+                    <div class="phone-flyer__info">
+                      <strong>Island Wear Sale</strong>
+                      <span>Mar 22 – Mar 28</span>
+                      <span class="phone-flyer__views">👁 432 views</span>
+                    </div>
+                  </div>
+                  <div class="phone-flyer">
+                    <div class="phone-flyer__img">📰</div>
+                    <div class="phone-flyer__info">
+                      <strong>New World Groceries</strong>
+                      <span>Mar 24 – Mar 31</span>
+                      <span class="phone-flyer__views">👁 290 views</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="phone-card">
-                <div class="phone-card__title">Free Shipping Weekend</div>
-                <div class="phone-card__business">Fiji Electronics — Lautoka</div>
-                <div class="phone-card__timer">Ends in 1d 6h</div>
+
+              <!-- Screen: Nearby -->
+              <div class="phone-page" id="pageNearby">
+                <div class="phone-screen__header">
+                  <strong>Nearby</strong>
+                  <span class="phone-location-badge">📍 Suva</span>
+                </div>
+                <div class="phone-scroll">
+                  <div class="phone-map-placeholder">
+                    <div class="phone-map__dot phone-map__dot--1"></div>
+                    <div class="phone-map__dot phone-map__dot--2"></div>
+                    <div class="phone-map__dot phone-map__dot--3"></div>
+                    <span>Map View</span>
+                  </div>
+                  <div class="phone-nearby-card">
+                    <div class="phone-nearby__icon">🛒</div>
+                    <div class="phone-nearby__info">
+                      <strong>MH Supermarket</strong>
+                      <span>0.8 km · 3 active deals</span>
+                    </div>
+                  </div>
+                  <div class="phone-nearby-card">
+                    <div class="phone-nearby__icon">👗</div>
+                    <div class="phone-nearby__info">
+                      <strong>Courts Suva</strong>
+                      <span>1.2 km · 2 active deals</span>
+                    </div>
+                  </div>
+                  <div class="phone-nearby-card">
+                    <div class="phone-nearby__icon">📱</div>
+                    <div class="phone-nearby__info">
+                      <strong>Vodafone Fiji</strong>
+                      <span>1.5 km · 1 active deal</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <!-- Screen: Profile -->
+              <div class="phone-page" id="pageProfile">
+                <div class="phone-scroll">
+                  <div class="phone-profile__header">
+                    <div class="phone-profile__avatar">JR</div>
+                    <strong>Joe Reza</strong>
+                    <span class="phone-profile__tier">🥇 Gold Member</span>
+                  </div>
+                  <div class="phone-profile__stats">
+                    <div><strong>12</strong><span>Saved</span></div>
+                    <div><strong>5</strong><span>Redeemed</span></div>
+                    <div><strong>8</strong><span>Following</span></div>
+                  </div>
+                  <div class="phone-profile__badges">
+                    <strong>Recent Badges</strong>
+                    <div class="phone-profile__badge-row">
+                      <span class="phone-badge">🏆 First Deal</span>
+                      <span class="phone-badge">🔥 7-Day Streak</span>
+                      <span class="phone-badge">⭐ Super Saver</span>
+                    </div>
+                  </div>
+                  <div class="phone-profile__menu">
+                    <div class="phone-profile__item">📋 My Deals</div>
+                    <div class="phone-profile__item">❤️ Favourites</div>
+                    <div class="phone-profile__item">🔔 Notifications</div>
+                    <div class="phone-profile__item">⚙️ Settings</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="phone-nav">
+              <button class="phone-nav__item phone-nav__item--active" data-page="pageHome">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                <span>Home</span>
+              </button>
+              <button class="phone-nav__item" data-page="pageFlyers">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <span>Flyers</span>
+              </button>
+              <button class="phone-nav__item" data-page="pageNearby">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Nearby</span>
+              </button>
+              <button class="phone-nav__item" data-page="pageProfile">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Profile</span>
+              </button>
             </div>
           </div>
         </div>

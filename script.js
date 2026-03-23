@@ -109,6 +109,192 @@ function updatePhoneTime() {
 updatePhoneTime();
 setInterval(updatePhoneTime, 60000);
 
+// ---- Auto Demo Mode ----
+// The phone automatically showcases itself: scrolls, switches pages, opens deals, likes, etc.
+// Pauses when user interacts, resumes after idle.
+
+let autoDemo = null;
+let autoPaused = false;
+let autoTimeout = null;
+
+function pauseAutoDemo() {
+  autoPaused = true;
+  clearTimeout(autoTimeout);
+  // Resume after 8 seconds of no interaction
+  autoTimeout = setTimeout(() => { autoPaused = false; }, 8000);
+}
+
+// Pause on any user interaction with the phone
+document.querySelector('.phone-frame').addEventListener('pointerdown', pauseAutoDemo);
+document.querySelector('.phone-frame').addEventListener('wheel', pauseAutoDemo);
+
+function smoothScrollTo(el, target, duration) {
+  const start = el.scrollTop;
+  const diff = target - start;
+  let startTime = null;
+  function step(time) {
+    if (!startTime) startTime = time;
+    const progress = Math.min((time - startTime) / duration, 1);
+    const ease = progress < 0.5
+      ? 2 * progress * progress
+      : -1 + (4 - 2 * progress) * progress;
+    el.scrollTop = start + diff * ease;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function simulateHeart(index) {
+  const hearts = document.querySelectorAll('.phone-card__heart');
+  if (hearts[index] && hearts[index].dataset.liked === 'false') {
+    hearts[index].dataset.liked = 'true';
+    hearts[index].textContent = '♥';
+    hearts[index].style.color = '#ef4444';
+    hearts[index].style.transform = 'scale(1.4)';
+    setTimeout(() => { hearts[index].style.transform = 'scale(1)'; }, 200);
+  }
+}
+
+function simulateUnheart(index) {
+  const hearts = document.querySelectorAll('.phone-card__heart');
+  if (hearts[index] && hearts[index].dataset.liked === 'true') {
+    hearts[index].dataset.liked = 'false';
+    hearts[index].textContent = '♡';
+    hearts[index].style.color = '';
+    hearts[index].style.transform = 'scale(1.4)';
+    setTimeout(() => { hearts[index].style.transform = 'scale(1)'; }, 200);
+  }
+}
+
+function openDeal(dealKey) {
+  const deal = dealData[dealKey];
+  if (!deal) return;
+  document.getElementById('dealDiscount').textContent = deal.discount;
+  document.getElementById('dealTitle').textContent = deal.title;
+  document.getElementById('dealBusiness').textContent = deal.business;
+  showPhonePage('pageDeal');
+  document.querySelector('.phone-nav').style.display = 'none';
+}
+
+function closeDeal() {
+  showPhonePage('pageHome');
+  document.querySelector('.phone-nav').style.display = 'flex';
+}
+
+function simulateRedeem() {
+  const btn = document.querySelector('.phone-detail__btn');
+  if (btn) {
+    btn.textContent = 'Redeemed!';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = 'Redeem This Deal';
+      btn.style.background = '';
+    }, 1500);
+  }
+}
+
+// The demo sequence — a scripted tour of the app
+const demoSteps = [
+  // 1. Start on Home, scroll down slowly
+  () => {
+    showPhonePage('pageHome');
+    document.querySelector('.phone-nav').style.display = 'flex';
+    const scroll = document.querySelector('#pageHome .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 80, 1200);
+  },
+  // 2. Like first deal
+  () => { simulateHeart(0); },
+  // 3. Scroll more
+  () => {
+    const scroll = document.querySelector('#pageHome .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 200, 1200);
+  },
+  // 4. Like second deal
+  () => { simulateHeart(1); },
+  // 5. Scroll to see more deals
+  () => {
+    const scroll = document.querySelector('#pageHome .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 350, 1200);
+  },
+  // 6. Tap on a deal to open detail
+  () => { openDeal('deal1'); },
+  // 7. Scroll detail page
+  () => {
+    const scroll = document.querySelector('#pageDeal .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 100, 1000);
+  },
+  // 8. Redeem the deal
+  () => { simulateRedeem(); },
+  // 9. Wait, then go back
+  () => {},
+  // 10. Go back to home
+  () => { closeDeal(); },
+  // 11. Scroll back to top
+  () => {
+    const scroll = document.querySelector('#pageHome .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 0, 800);
+  },
+  // 12. Switch to Flyers
+  () => { showPhonePage('pageFlyers'); },
+  // 13. Scroll flyers
+  () => {
+    const scroll = document.querySelector('#pageFlyers .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 100, 1000);
+  },
+  // 14. Scroll more flyers
+  () => {
+    const scroll = document.querySelector('#pageFlyers .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 0, 800);
+  },
+  // 15. Switch to Nearby
+  () => { showPhonePage('pageNearby'); },
+  // 16. Scroll nearby
+  () => {
+    const scroll = document.querySelector('#pageNearby .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 80, 1000);
+  },
+  // 17. Back to top
+  () => {
+    const scroll = document.querySelector('#pageNearby .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 0, 800);
+  },
+  // 18. Switch to Profile
+  () => { showPhonePage('pageProfile'); },
+  // 19. Scroll profile
+  () => {
+    const scroll = document.querySelector('#pageProfile .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 120, 1000);
+  },
+  // 20. Scroll back
+  () => {
+    const scroll = document.querySelector('#pageProfile .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 0, 800);
+  },
+  // 21. Unlike hearts (reset)
+  () => { simulateUnheart(0); },
+  () => { simulateUnheart(1); },
+  // 22. Back to Home to restart loop
+  () => {
+    showPhonePage('pageHome');
+    const scroll = document.querySelector('#pageHome .phone-scroll');
+    if (scroll) smoothScrollTo(scroll, 0, 500);
+  },
+];
+
+let demoIndex = 0;
+function runDemoStep() {
+  if (autoPaused) {
+    setTimeout(runDemoStep, 500);
+    return;
+  }
+  demoSteps[demoIndex]();
+  demoIndex = (demoIndex + 1) % demoSteps.length;
+  setTimeout(runDemoStep, 2000);
+}
+
+// Start auto demo after a short delay
+setTimeout(runDemoStep, 2500);
+
 // Scroll-based nav shadow
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {

@@ -571,77 +571,59 @@ ul { list-style: none; }
   padding: 100px 0;
   background: var(--color-gray-100);
 }
-.contact__inner {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 48px;
-  align-items: start;
+.contact__inner--centered {
+  max-width: 520px;
+  margin: 0 auto;
 }
-.contact__form {
+.contact__card {
   background: var(--color-white);
-  padding: 36px;
+  padding: 48px 40px;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
 }
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.form-group {
+.contact__icon {
+  color: var(--color-primary);
   margin-bottom: 20px;
 }
-.form-group label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-gray-700);
-  margin-bottom: 6px;
-}
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--color-gray-300);
-  border-radius: var(--radius-sm);
-  font-family: var(--font);
-  font-size: 0.938rem;
+.contact__card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--color-dark);
+  margin-bottom: 12px;
+}
+.contact__card > p {
+  font-size: 1rem;
+  color: var(--color-gray-500);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.contact__email {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 24px;
   transition: var(--transition);
-  background: var(--color-white);
 }
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-light);
+.contact__email:hover {
+  color: var(--color-primary-dark);
 }
-.form-group textarea { resize: vertical; }
-.contact__info {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  padding-top: 20px;
+.contact__details {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-gray-100);
 }
 .contact__item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.938rem;
+  color: var(--color-gray-500);
 }
 .contact__item svg {
   color: var(--color-primary);
   flex-shrink: 0;
-  margin-top: 2px;
-}
-.contact__item strong {
-  display: block;
-  font-size: 0.938rem;
-  color: var(--color-dark);
-  margin-bottom: 2px;
-}
-.contact__item p {
-  font-size: 0.938rem;
-  color: var(--color-gray-500);
 }
 
 /* ---- Footer ---- */

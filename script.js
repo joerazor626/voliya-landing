@@ -13,30 +13,6 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Contact form handler (GitHub Pages — no backend)
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const btn = contactForm.querySelector('button[type="submit"]');
-  const originalText = btn.textContent;
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  // Simulate send — replace with actual form service (Formspree, etc.)
-  setTimeout(() => {
-    btn.textContent = 'Message Sent!';
-    btn.style.background = '#10b981';
-    contactForm.reset();
-
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 3000);
-  }, 1000);
-});
-
 // Scroll-based nav shadow
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {

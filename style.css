@@ -225,8 +225,8 @@ ul { list-style: none; }
 .phone-frame {
   width: 300px;
   background: var(--color-dark);
-  border-radius: 36px;
-  padding: 4px;
+  border-radius: 40px;
+  padding: 8px;
   box-shadow: var(--shadow-xl), 0 0 0 2px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
@@ -238,9 +238,10 @@ ul { list-style: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 20px 4px;
+  padding: 10px 20px 4px;
   background: var(--color-white);
   border-radius: 32px 32px 0 0;
+  flex-shrink: 0;
   font-size: 0.688rem;
   font-weight: 600;
   color: var(--color-dark);
@@ -641,8 +642,9 @@ ul { list-style: none; }
   display: flex;
   background: var(--color-white);
   border-top: 1px solid var(--color-gray-100);
-  padding: 6px 0 10px;
+  padding: 6px 0 14px;
   border-radius: 0 0 32px 32px;
+  flex-shrink: 0;
 }
 .phone-nav__item {
   flex: 1;
